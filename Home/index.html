@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Comprehensive Bus Management System for tracking and managing bus operations in Addis Ababa">
+    <title>Bus Management System - Dashboard</title>
+
+    <!-- Preconnect to CDN for better performance -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://unpkg.com">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <!-- Leaflet Core -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <!-- Leaflet Fullscreen Plugin -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.fullscreen@1.6.0/Control.FullScreen.css">
+    <script src="https://unpkg.com/leaflet.fullscreen@1.6.0/Control.FullScreen.js" defer></script>
+
+   <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    <!-- Header -->
+    <header role="banner">
+        <div class="logo">
+        <a class="logo" href="#" aria-label="City Buses home">
+        <i class="fas fa-bus-alt" aria-hidden="true"></i>
+        <span>City Buses</span>
+      </a>
+        </div>
+
+        <div class="auth-controls">
+            <button class="theme-toggle" aria-label="Toggle theme" aria-pressed="false">
+                <i class="fas fa-moon" aria-hidden="true"></i>
+            </button>
+
+            <div class="user-menu">
+                <button class="user-avatar" id="user-avatar" aria-expanded="false" aria-controls="dropdown-menu">
+                    <i class="fas fa-user" aria-hidden="true"></i>
+                </button>
+                <div class="dropdown-menu" id="dropdown-menu" role="menu">
+                    <a href="#" role="menuitem"><i class="fas fa-user-circle" aria-hidden="true"></i> Profile</a>
+                    <a href="#" role="menuitem"><i class="fas fa-cog" aria-hidden="true"></i> Settings</a>
+                    <a href="#" role="menuitem"><i class="fas fa-sign-out-alt" aria-hidden="true"></i> Logout</a>
+                </div>
+            </div> 
+        </div>
+    </header>
+
+    <div class="main-container">
+       <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar" aria-label="Main navigation">
+    <nav class="sidebar-nav-container" aria-label="Sidebar menu">
+        <h2 class="visually-hidden">Main Menu</h2>
+        <ul class="sidebar-nav" role="list">
+        <li class="sidebar-item" role="listitem">
+            <a href="#" class="sidebar-link active" aria-current="page">
+            <span class="sidebar-icon" aria-hidden="true">
+                <i class="fas fa-tachometer-alt"></i>
+            </span>
+            <span class="sidebar-text">Dashboard</span>
+            </a>
+        </li>
+        <li class="sidebar-item" role="listitem">
+            <a href="Buses/buses.html" class="sidebar-link">
+            <span class="sidebar-icon" aria-hidden="true">
+                <i class="fas fa-bus"></i>
+            </span>
+            <span class="sidebar-text">Buses</span>
+            </a>
+        </li>
+        <li class="sidebar-item" role="listitem">
+            <a href="#" class="sidebar-link">
+            <span class="sidebar-icon" aria-hidden="true">
+                <i class="fas fa-route"></i>
+            </span>
+            <span class="sidebar-text">Routes</span>
+            </a>
+        </li>
+        <li class="sidebar-item" role="listitem">
+            <a href="#" class="sidebar-link">
+            <span class="sidebar-icon" aria-hidden="true">
+                <i class="fas fa-calendar-alt"></i>
+            </span>
+            <span class="sidebar-text">Schedule</span>
+            </a>
+        </li>
+        <li class="sidebar-item" role="listitem">
+            <a href="Booking/book.html" class="sidebar-link">
+            <span class="sidebar-icon" aria-hidden="true">
+                <i class="fas fa-ticket-alt"></i>
+            </span>
+            <span class="sidebar-text">Booking</span>
+            </a>
+        </li>
+        <li class="sidebar-item" role="listitem">
+            <a href="#" class="sidebar-link">
+            <span class="sidebar-icon" aria-hidden="true">
+                <i class="fas fa-users"></i>
+            </span>
+            <span class="sidebar-text">Passengers</span>
+            </a>
+        </li>
+        <li class="sidebar-item" role="listitem">
+            <a href="#" class="sidebar-link">
+            <span class="sidebar-icon" aria-hidden="true">
+                <i class="fas fa-chart-line"></i>
+            </span>
+            <span class="sidebar-text">Analytics</span>
+            </a>
+        </li>
+        <li class="sidebar-item" role="listitem">
+            <a href="#" class="sidebar-link">
+            <span class="sidebar-icon" aria-hidden="true">
+                <i class="fas fa-cog"></i>
+            </span>
+            <span class="sidebar-text">Settings</span>
+            </a>
+        </li>
+        </ul>
+    </nav>
+    </aside>
+
+
+        <!-- Main Content -->
+        <main class="content" id="main-content" role="main">
+            <h1>Dashboard Overview</h1>
+            <p class="subtitle">Welcome back, Administrator. Here's what's happening today.</p>
+
+            <!-- Dashboard Cards -->
+            <section aria-labelledby="dashboard-cards-heading">
+                <h2 id="dashboard-cards-heading" class="visually-hidden">Dashboard statistics</h2>
+                <div class="dashboard-grid">
+                    <div class="card">
+                        <h3>Active Buses</h3>
+                        <div class="value"><span id="dashboard-active-buses">0</span></div>
+                        <div class="trend up">
+                            <i class="fas fa-arrow-up" aria-hidden="true"></i> 2% from yesterday
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h3>Passengers Today</h3>
+                        <div class="value">1,842</div>
+                        <div class="trend up">
+                            <i class="fas fa-arrow-up" aria-hidden="true"></i> 10% from yesterday
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h3>On-time Performance</h3>
+                        <div class="value">89%</div>
+                        <div class="trend down">
+                            <i class="fas fa-arrow-down" aria-hidden="true"></i> 3% from yesterday
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h3>Fuel Efficiency</h3>
+                        <div class="value">8.2 km/L</div>
+                        <div class="trend up">
+                            <i class="fas fa-arrow-up" aria-hidden="true"></i> 0.4% from yesterday
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Map -->
+            <section aria-labelledby="map-section-heading">
+                <h2 id="map-section-heading" class="visually-hidden">Bus network map</h2>
+                <div class="map-container">
+                    <div id="map" role="application" aria-label="Interactive map of bus routes"></div>
+                    <div class="map-overlay">
+                        <h3>Addis Ababa Bus Network</h3>
+                        <p>Active buses: <span id="active-buses-count">0</span></p>
+                        <p>Last updated: <span id="last-updated">00:00:00</span></p>
+                    </div>
+                    <div class="route-selector">
+                        <h4>Select Route</h4>
+                        <div class="route-options" role="radiogroup">
+                            <button class="route-option active" data-route="all" role="radio" aria-checked="true">All Routes</button>
+                            <button class="route-option" data-route="5" role="radio" aria-checked="false">Route 5 (Arat Kilo - Mexico)</button>
+                            <button class="route-option" data-route="8" role="radio" aria-checked="false">Route 8 (Mercato - Saris)</button>
+                            <button class="route-option" data-route="12" role="radio" aria-checked="false">Route 12 (University - Piazza)</button>
+                        </div>
+                    </div>
+                    
+                    <div class="map-controls">
+                        <button id="zoom-in" aria-label="Zoom in"><i class="fas fa-plus" aria-hidden="true"></i></button>
+                        <button id="zoom-out" aria-label="Zoom out"><i class="fas fa-minus" aria-hidden="true"></i></button>
+                        <button id="locate-me" aria-label="Locate my position"><i class="fas fa-location-arrow" aria-hidden="true"></i></button>
+                        <button id="fullscreen-btn" aria-label="Toggle fullscreen"><i class="fas fa-expand" aria-hidden="true"></i></button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Activity Feed -->
+            <section aria-labelledby="activity-feed-heading">
+                <h2 id="activity-feed-heading">Recent Activities</h2>
+                <div id="activity-items">
+                    <article class="activity-item">
+                        <div class="activity-icon" aria-hidden="true">
+                            <i class="fas fa-bus"></i>
+                        </div>
+                        <div class="activity-details">
+                            <h3>Bus AA-101 delayed</h3>
+                            <p>5 minutes ago - Traffic congestion on Route 12</p>
+                        </div>
+                    </article>
+                    <article class="activity-item">
+                        <div class="activity-icon" aria-hidden="true">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="activity-details">
+                            <h3>New driver assigned</h3>
+                            <p>25 minutes ago - Driver Alemayehu to Bus AA-205</p>
+                        </div>
+                    </article>
+                    <article class="activity-item">
+                        <div class="activity-icon" aria-hidden="true">
+                            <i class="fas fa-tools"></i>
+                        </div>
+                        <div class="activity-details">
+                            <h3>Maintenance scheduled</h3>
+                            <p>1 hour ago - Bus AA-178 for brake inspection</p>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <!-- Data Table -->
+            <section aria-labelledby="bus-table-heading">
+                <h2 id="bus-table-heading" class="visually-hidden">Bus schedule data</h2>
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <caption class="visually-hidden"> <h3>Current bus schedule and status information</h3></caption>
+                        <thead>
+                            <tr>
+                                <th scope="col">Bus Number</th>
+                                <th scope="col">Route</th>
+                                <th scope="col">Departure</th>
+                                <th scope="col">Arrival</th>
+                                <th scope="col">Driver</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="bus-table-body">
+                            <!-- Populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="container footer-grid">
+            <div class="footer-col">
+                <h3 class="footer-title">Buses</h3>
+                <p>Making travel comfortable and affordable for everyone across the country.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter" aria-hidden="true"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
+                </div>
+            </div>
+            <nav class="footer-col" aria-label="Footer navigation">
+                <h4 class="footer-title">Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">Routes</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">Buses</a></li>
+                </ul>
+            </nav>
+            <div class="footer-col">
+                <h4 class="footer-title">Support</h4>
+                <ul class="footer-links">
+                    <li><a href="#">FAQs</a></li>
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">Terms</a></li>
+                    <li><a href="#">Privacy</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4 class="footer-title">Contact</h4>
+                <address>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-phone" aria-hidden="true"></i> +25192-100-4920</li>
+                        <li><i class="fas fa-envelope" aria-hidden="true"></i> tasfeyetakele@gmail.com</li>
+                        <li><i class="fas fa-map-marker-alt" aria-hidden="true"></i> 1000 Addis Ababa, Ethiopia</li>
+                    </ul>
+                </address>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="currentYear"></span> Tekele Tesfeye. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>

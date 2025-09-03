@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="City Buses - Advanced bus booking system with real-time availability and interactive seat selection" />
+  <title>City Buses | Book City Buses Online</title>
+
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" />
+  <link rel="stylesheet" href="book.css" />
+
+</head>
+<body>
+  
+  <!-- Loading Overlay -->
+  <div id="loadingOverlay" class="loading-overlay" hidden aria-hidden="true">
+    <div class="loading-spinner" role="status" aria-label="Loading"></div>
+  </div>
+
+  <!-- Header -->
+  <header class="header" role="banner">
+    <div class="container header-row">
+      <a class="logo" href="#" aria-label="City Buses home">
+        <i class="fas fa-bus-alt" aria-hidden="true"></i>
+        <span>City Buses</span>
+      </a>
+
+      <button id="mobileMenuBtn" class="mobile-menu-btn" aria-expanded="false" aria-controls="mainNav" aria-label="Open navigation">
+        <span class="hamburger" aria-hidden="true"></span>
+      </button>
+
+      <nav id="mainNav" class="main-nav" aria-hidden="true">
+        <ul class="nav-list" role="menubar">
+          <li role="none"><a role="menuitem" class="nav-link" href="#" aria-current="page">Home</a></li>
+          <li role="none"><a role="menuitem" class="nav-link" href="#book">Book</a></li>
+          <li role="none"><a role="menuitem" class="nav-link" href="#routes">Routes</a></li>
+          <li role="none"><a role="menuitem" class="nav-link" href="#about">About</a></li>
+          <li role="none"><a role="menuitem" class="nav-link" href="#contact">Contact</a></li>
+        </ul>
+
+        <div class="auth-buttons">
+          <button class="btn btn-outline" type="button">Login</button>
+          <button class="btn btn-primary" type="button">Sign Up</button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main id="main-content">
+    <!-- Hero -->
+    <section class="hero" id="book" aria-labelledby="hero-title">
+      <div class="container hero-inner">
+        <div class="hero-text">
+          <h1 id="hero-title" class="hero-title">Travel Smart, Arrive Happy.</h1>
+          <p class="hero-subtitle">Book your bus tickets in seconds with our advanced booking system and interactive seat selection.</p>
+        </div>
+
+        <div class="search-card" aria-labelledby="search-heading">
+          <h2 id="search-heading" class="sr-only">Search City Buses</h2>
+
+          <div class="search-tabs" role="tablist" aria-label="Search modes">
+            <button class="search-tab active" role="tab" aria-selected="true" data-target="one-way-form">One Way</button>
+            <button class="search-tab" role="tab" aria-selected="false" data-target="round-trip-form">Round Trip</button>
+            <button class="search-tab" role="tab" aria-selected="false" data-target="multi-city-form">Multi-City</button>
+          </div>
+
+          <div class="search-forms">
+            <!-- One Way -->
+            <form id="one-way-form" class="search-form active" autocomplete="off" novalidate>
+              <div class="row">
+                <div class="form-group">
+                  <label for="fromCity" class="sr-only">From</label>
+                  <div class="input-with-icon">
+                    <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                    <select id="fromCity" name="fromCity" required>
+                      <option value="" disabled selected>From (Select Location)</option>
+                      <option value="Mexico">Mexico</option>
+                      <option value="Megenagna">Megenagna</option>
+                      <option value="Ayat">Ayat</option>
+                      <option value="Bole">Bole</option>
+                      <option value="CMC">CMC</option>
+                      <option value="Arat Kilo">Arat Kilo</option>
+                      <option value="Saris">Saris</option>
+                      <option value="Mercato">Mercato</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="toCity" class="sr-only">To</label>
+                  <div class="input-with-icon">
+                    <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                    <select id="toCity" name="toCity" required>
+                      <option value="" disabled selected>To (Select Location)</option>
+                      <option value="Mexico">Mexico</option>
+                      <option value="Megenagna">Megenagna</option>
+                      <option value="Ayat">Ayat</option>
+                      <option value="Bole">Bole</option>
+                      <option value="CMC">CMC</option>
+                      <option value="Arat Kilo">Arat Kilo</option>
+                      <option value="Saris">Saris</option>
+                      <option value="Mercato">Mercato</option>
+                      
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="form-group">
+                  <label for="departureDate" class="sr-only">Departure Date</label>
+                  <div class="input-with-icon">
+                    <i class="far fa-calendar-alt" aria-hidden="true"></i>
+                    <input id="departureDate" name="departureDate" type="date" required>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="passengers" class="sr-only">Passengers</label>
+                  <div class="input-with-icon">
+                    <i class="fas fa-users" aria-hidden="true"></i>
+                    <select id="passengers" name="passengers" required>
+                      <option value="" disabled selected>Passengers</option>
+                      <option value="1">1 Passenger</option>
+                      <option value="2">2 Passengers</option>
+                      <option value="3">3 Passengers</option>
+                      <option value="4">4 Passengers</option>
+                      <option value="5">5 Passengers</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row actions">
+                <button type="submit" class="btn btn-primary btn-search">
+                  <i class="fas fa-search" aria-hidden="true"></i> Search City Buses
+                </button>
+                <button type="button" id="viewPopularBtn" class="btn btn-ghost">View Popular</button>
+              </div>
+            </form>
+
+            <!-- Round Trip (placeholder - same fields + return date) -->
+            <form id="round-trip-form" class="search-form" hidden>
+              <div class="row">
+                <div class="form-group">
+                  <label for="fromCityRt" class="sr-only">From City</label>
+                  <div class="input-with-icon">
+                    <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                    <select id="fromCityRt" name="fromCityRt" required>
+                      <option value="" disabled selected>From (Select Location)</option>
+                      <option value="Mexico">Mexico</option>
+                      <option value="Megenagna">Megenagna</option>
+                      <option value="Ayat">Ayat</option>
+                      <option value="Bole">Bole</option>
+                      <option value="CMC">CMC</option>
+                      <option value="Arat Kilo">Arat Kilo</option>
+                      <option value="Saris">Saris</option>
+                      <option value="Mercato">Mercato</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="toCityRt" class="sr-only">To City</label>
+                  <div class="input-with-icon">
+                    <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                    <select id="toCityRt" name="toCityRt" required>
+                      <option value="" disabled selected>To (Select Location)</option>
+                      <option value="Mexico">Mexico</option>
+                      <option value="Megenagna">Megenagna</option>
+                      <option value="Ayat">Ayat</option>
+                      <option value="Bole">Bole</option>
+                      <option value="CMC">CMC</option>
+                      <option value="Arat Kilo">Arat Kilo</option>
+                      <option value="Saris">Saris</option>
+                      <option value="Mercato">Mercato</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group">
+                  <label for="departureDateRt" class="sr-only">Departure Date</label>
+                  <div class="input-with-icon">
+                    <i class="far fa-calendar-alt" aria-hidden="true"></i>
+                    <input id="departureDateRt" name="departureDateRt" type="date" required>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="returnDateRt" class="sr-only">Return Date</label>
+                  <div class="input-with-icon">
+                    <i class="far fa-calendar-alt" aria-hidden="true"></i>
+                    <input id="returnDateRt" name="returnDateRt" type="date" required>
+                  </div>
+                </div>
+              </div>
+              <div class="row actions">
+                <button type="submit" class="btn btn-primary">Search Round Trip</button>
+              </div>
+            </form>
+
+            <!-- Multi City (placeholder) -->
+            <form id="multi-city-form" class="search-form" hidden>
+              <p class="muted">Multi-city search coming soon — you can search one-way or round-trip for now.</p>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Decorative background elements -->
+      <div class="hero-bg">
+        <div class="bg-element bg-1" aria-hidden="true"></div>
+        <div class="bg-element bg-2" aria-hidden="true"></div>
+        <div class="bg-element bg-3" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features-section" aria-labelledby="features-title">
+      <div class="container">
+        <h2 id="features-title" class="section-title">Why Choose City Buses?</h2>
+        <div class="features-grid">
+          <article class="feature-card" tabindex="0">
+            <div class="feature-icon"><i class="fas fa-bolt" aria-hidden="true"></i></div>
+            <h3>Instant Booking</h3>
+            <p>Book your tickets in seconds with our lightning-fast system.</p>
+          </article>
+          <article class="feature-card" tabindex="0">
+            <div class="feature-icon"><i class="fas fa-shield-alt" aria-hidden="true"></i></div>
+            <h3>Safe Travel</h3>
+            <p>Our City Buses follow strict safety protocols for your peace of mind.</p>
+          </article>
+          <article class="feature-card" tabindex="0">
+            <div class="feature-icon"><i class="fas fa-percentage" aria-hidden="true"></i></div>
+            <h3>Best Prices</h3>
+            <p>We guarantee competitive prices and clear fees.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Popular Routes -->
+    <section id="routes" class="routes-section" aria-labelledby="routes-title">
+      <div class="container">
+        <h2 id="routes-title" class="section-title">Popular Routes</h2>
+        <div class="routes-header">
+          <p>Select a route and book instantly with our Quick Book feature</p>
+          <button id="quickBookBtn" class="btn btn-primary" style="display: none;">
+            <i class="fas fa-bolt" aria-hidden="true"></i> Quick Book Selected
+          </button>
+        </div>
+        <div id="popularRoutes" class="routes-grid" aria-live="polite"></div>
+      </div>
+    </section>
+
+   <!-- Testimonials -->
+<section class="testimonials-section" aria-labelledby="testimonials-title">
+  <div class="container">
+    <h2 id="testimonials-title" class="section-title">What Our Customers Say</h2>
+
+    <div class="testimonials-slider">
+      <article class="testimonial-card" tabindex="0">
+        <div class="testimonial-avatar"><i class="fas fa-user" aria-hidden="true"></i></div>
+        <blockquote class="testimonial-text">
+          City Buses made my travel so convenient. The booking was fast and the bus was comfortable.
+        </blockquote>
+        <div class="testimonial-author">Sarah Abebe — Frequent Traveler</div>
+      </article>
+
+      <article class="testimonial-card" tabindex="0">
+        <div class="testimonial-avatar"><i class="fas fa-user" aria-hidden="true"></i></div>
+        <blockquote class="testimonial-text">
+          I love how easy it is to find and book my preferred route. The City Buses are always on time and clean.
+        </blockquote>
+        <div class="testimonial-author">Daniel Mekonnen — Daily Commuter</div>
+      </article>
+
+      <article class="testimonial-card" tabindex="0">
+        <div class="testimonial-avatar"><i class="fas fa-user" aria-hidden="true"></i></div>
+        <blockquote class="testimonial-text">
+          Excellent service from start to finish! The seat selection was easy, and the bus was smooth and enjoyable.
+        </blockquote>
+        <div class="testimonial-author">Marta Alemu — First-Time User</div>
+      </article>
+
+      <article class="testimonial-card" tabindex="0">
+        <div class="testimonial-avatar"><i class="fas fa-user" aria-hidden="true"></i></div>
+        <blockquote class="testimonial-text">
+          Booking was quick, and the bus was exceptionally comfortable. I'll definitely use this service again!
+        </blockquote>
+        <div class="testimonial-author">Yonatan Tadesse — Business Traveler</div>
+      </article>
+    </div>
+  </div>
+</section>
+
+
+    <!-- Newsletter -->
+    <section class="newsletter-section" aria-labelledby="newsletter-title">
+      <div class="container newsletter-inner">
+        <h2 id="newsletter-title">Get Special Offers</h2>
+        <p>Subscribe to receive exclusive deals and discounts.</p>
+        <form id="newsletterForm" class="newsletter-form" novalidate>
+          <label for="newsletterEmail" class="sr-only">Email</label>
+          <input id="newsletterEmail" type="email" placeholder="Your email address" required>
+          <button type="submit" class="btn btn-primary">Subscribe</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer" role="contentinfo">
+    <div class="container footer-grid">
+      <div class="footer-col">
+        <h3 class="footer-title">City Buses</h3>
+        <p>Making travel comfortable and affordable for everyone across the country.</p>
+        <div class="social-links">
+          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
+          <a href="#" aria-label="Twitter"><i class="fab fa-twitter" aria-hidden="true"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+          <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
+        </div>
+      </div>
+      <nav class="footer-col" aria-label="Footer links">
+        <h4 class="footer-title">Quick Links</h4>
+        <ul class="footer-links">
+          <li><a href="#">Home</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Services</a></li>
+          <li><a href="#routes">Routes</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="#buses">Buses</a></li>
+        </ul>
+      </nav>
+      <div class="footer-col">
+        <h4 class="footer-title">Support</h4>
+        <ul class="footer-links">
+          <li><a href="#">FAQs</a></li>
+          <li><a href="#">Help Center</a></li>
+          <li><a href="#">Terms</a></li>
+          <li><a href="#">Privacy</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 class="footer-title">Contact</h4>
+        <ul class="footer-contact">
+          <li><i class="fas fa-phone" aria-hidden="true"></i> +25192-100-4920</li>
+          <li><i class="fas fa-envelope" aria-hidden="true"></i> tasfeyetakele@gmail.com</li>
+          <li><i class="fas fa-map-marker-alt" aria-hidden="true"></i> 1000 Addis Ababa, Ethiopia</li>
+        </ul>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; <span id="currentYear"></span> Tekele Tesfeye. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Seat Selection Modal -->
+  <div id="seatModal" class="modal-overlay" hidden aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal">
+      <button id="modalClose" class="modal-close" aria-label="Close seat selection">
+        <i class="fas fa-times" aria-hidden="true"></i>
+      </button>
+
+      <header class="modal-header">
+        <h2 id="modalTitle">Select Your Seats</h2>
+        <p class="muted" id="modalSubtitle">Choose preferred seats for a comfortable journey</p>
+      </header>
+
+      <section class="modal-body">
+        <div class="bus-info">
+          <div><i class="fas fa-route" aria-hidden="true"></i> <span id="modalRoute">—</span></div>
+          <div><i class="far fa-calendar-alt" aria-hidden="true"></i> <span id="modalDate">—</span></div>
+          <div><i class="far fa-clock" aria-hidden="true"></i> <span id="modalTime">—</span></div>
+          <div><i class="fas fa-bus" aria-hidden="true"></i> <span id="modalBusType">—</span></div>
+        </div>
+
+        <div class="seat-selection">
+          <div id="seatsGrid" class="seats-grid" aria-label="Seat map"></div>
+
+          <aside class="seat-legend">
+            <div class="legend-item"><span class="legend-box available"></span><small>Available</small></div>
+            <div class="legend-item"><span class="legend-box selected"></span><small>Selected</small></div>
+            <div class="legend-item"><span class="legend-box booked"></span><small>Booked</small></div>
+          </aside>
+        </div>
+
+        <div class="passenger-details">
+          <h3>Passenger Details</h3>
+          <form id="passengerForm" novalidate>
+            <!-- dynamic inputs -->
+          </form>
+        </div>
+      </section>
+
+      <footer class="modal-actions">
+        <button id="cancelBooking" class="btn btn-outline">Cancel</button>
+        <button id="confirmBooking" class="btn btn-primary">Confirm Booking</button>
+      </footer>
+    </div>
+  </div>
+
+  <!-- Confirmation Modal -->
+  <div id="confirmationModal" class="modal-overlay" hidden aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="confirmTitle">
+    <div class="modal confirmation">
+      <header class="modal-header">
+        <h2 id="confirmTitle">Booking Confirmed!</h2>
+      </header>
+
+      <section class="modal-body confirmation-body">
+        <div class="confirmation-icon"><i class="fas fa-check-circle" aria-hidden="true"></i></div>
+        <div class="confirmation-details">
+          <div><strong>Booking ID:</strong> <span id="confirmationId">—</span></div>
+          <div><strong>Route:</strong> <span id="confirmationRoute">—</span></div>
+          <div><strong>Date:</strong> <span id="confirmationDate">—</span></div>
+          <div><strong>Time:</strong> <span id="confirmationTime">—</span></div>
+          <div><strong>Seats:</strong> <span id="confirmationSeats">—</span></div>
+          <div><strong>Total:</strong> <span id="confirmationTotal">—</span></div>
+        </div>
+      </section>
+
+      <footer class="modal-actions">
+        <button id="printTicket" class="btn btn-primary">Print Ticket</button>
+        <button id="closeConfirmation" class="btn btn-outline">Close</button>
+      </footer>
+    </div>
+  </div>
+
+  <script src="book.js"></script>
+</body>
+</html>

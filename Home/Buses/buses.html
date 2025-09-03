@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bus Fleet Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="buses.css">
+</head>
+<body>
+    <!-- Mobile menu toggle button -->
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h1><i class="fas fa-bus"></i> City Buses</h1>
+            <p>Real-time bus information dashboard</p>
+        </div>
+        
+        <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input type="text" placeholder="Search buses..." id="searchInput" aria-label="Search buses">
+        </div>
+        
+        <div class="filter-options">
+            <div class="filter-option active" data-filter="all">All</div>
+            <div class="filter-option" data-filter="on-time">On Time</div>
+            <div class="filter-option" data-filter="delayed">Delayed</div>
+            <div class="filter-option" data-filter="offline">Offline</div>
+            <div class="filter-option" data-filter="maintenance">Maintenance</div>
+        </div>
+        
+        <div class="sidebar-nav" id="busList">
+            <!-- Bus items will be generated here by JavaScript -->
+        </div>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="content-header">
+            <h2>Bus Fleet Overview</h2>
+            <div class="header-actions">
+                <div class="current-time" id="currentTime"></div>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+        
+        <div class="stats-cards">
+            <div class="stat-card">
+                <i class="fas fa-bus"></i>
+                <h3 id="totalBuses">24</h3>
+                <p>Total Buses</p>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-check-circle"></i>
+                <h3 id="activeBuses">18</h3>
+                <p>Active Buses</p>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-tachometer-alt"></i>
+                <h3>92%</h3>
+                <p>On-time Performance</p>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-users"></i>
+                <h3>1,842</h3>
+                <p>Passengers Today</p>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <div class="section-header">
+                <h3>Active Buses</h3>
+                <a href="#" class="view-all">View All <i class="fas fa-chevron-right"></i></a>
+            </div>
+            <div class="bus-grid" id="activeBusGrid">
+                <!-- Active bus cards will be generated here -->
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <div class="section-header">
+                <h3>Live Map</h3>
+                <a href="#" class="view-all" id="fullScreenMap">Full Screen <i class="fas fa-expand"></i></a>
+            </div>
+            <div class="map-container">
+                <div id="map"></div>
+                <div class="map-overlay">
+                    <h4>Addis Ababa Bus Network</h4>
+                    <p>Active buses: <span id="mapActiveBuses">18</span></p>
+                    <p>Last updated: <span id="mapLastUpdated">00:00:00</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="buses.js"></script>
+</body>
+</html>
