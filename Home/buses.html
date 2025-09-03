@@ -11,100 +11,176 @@
     <link rel="stylesheet" href="buses.css">
 </head>
 <body>
-    <!-- Mobile menu toggle button -->
-    <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
-        <i class="fas fa-bars"></i>
-    </button>
+  <!-- Mobile menu toggle button -->
+  <button class="menu-toggle" id="menuToggle" aria-label="Toggle sidebar menu" aria-controls="sidebar" aria-expanded="false">
+    <i class="fas fa-bars" aria-hidden="true"></i>
+  </button>
 
-    <!-- Sidebar -->
-    <div class="sidebar" id="sidebar">
-        <div class="sidebar-header">
-            <h1><i class="fas fa-bus"></i> City Buses</h1>
-            <p>Real-time bus information dashboard</p>
-        </div>
-        
-        <div class="search-box">
-            <i class="fas fa-search"></i>
-            <input type="text" placeholder="Search buses..." id="searchInput" aria-label="Search buses">
-        </div>
-        
-        <div class="filter-options">
-            <div class="filter-option active" data-filter="all">All</div>
-            <div class="filter-option" data-filter="on-time">On Time</div>
-            <div class="filter-option" data-filter="delayed">Delayed</div>
-            <div class="filter-option" data-filter="offline">Offline</div>
-            <div class="filter-option" data-filter="maintenance">Maintenance</div>
-        </div>
-        
-        <div class="sidebar-nav" id="busList">
-            <!-- Bus items will be generated here by JavaScript -->
-        </div>
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <h1><i class="fas fa-bus" aria-hidden="true"></i> City Buses</h1>
+      <p>Real-time bus information dashboard</p>
     </div>
-    
-    <!-- Main Content -->
-    <div class="main-content">
-        <div class="content-header">
-            <h2>Bus Fleet Overview</h2>
-            <div class="header-actions">
-                <div class="current-time" id="currentTime"></div>
-                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-                    <i class="fas fa-moon"></i>
-                </button>
-            </div>
-        </div>
-        
-        <div class="stats-cards">
-            <div class="stat-card">
-                <i class="fas fa-bus"></i>
-                <h3 id="totalBuses">24</h3>
-                <p>Total Buses</p>
-            </div>
-            <div class="stat-card">
-                <i class="fas fa-check-circle"></i>
-                <h3 id="activeBuses">18</h3>
-                <p>Active Buses</p>
-            </div>
-            <div class="stat-card">
-                <i class="fas fa-tachometer-alt"></i>
-                <h3>92%</h3>
-                <p>On-time Performance</p>
-            </div>
-            <div class="stat-card">
-                <i class="fas fa-users"></i>
-                <h3>1,842</h3>
-                <p>Passengers Today</p>
-            </div>
-        </div>
-        
-        <div class="content-section">
-            <div class="section-header">
-                <h3>Active Buses</h3>
-                <a href="#" class="view-all">View All <i class="fas fa-chevron-right"></i></a>
-            </div>
-            <div class="bus-grid" id="activeBusGrid">
-                <!-- Active bus cards will be generated here -->
-            </div>
-        </div>
-        
-        <div class="content-section">
-            <div class="section-header">
-                <h3>Live Map</h3>
-                <a href="#" class="view-all" id="fullScreenMap">Full Screen <i class="fas fa-expand"></i></a>
-            </div>
-            <div class="map-container">
-                <div id="map"></div>
-                <div class="map-overlay">
-                    <h4>Addis Ababa Bus Network</h4>
-                    <p>Active buses: <span id="mapActiveBuses">18</span></p>
-                    <p>Last updated: <span id="mapLastUpdated">00:00:00</span></p>
-                </div>
-            </div>
-        </div>
-    </div>
-    
 
-    <!-- Leaflet JS -->
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="buses.js"></script>
+    <div class="search-box">
+      <label for="searchInput" class="sr-only">Search buses</label>
+      <i class="fas fa-search" aria-hidden="true"></i>
+      <input type="search" placeholder="Search buses..." id="searchInput" aria-label="Search buses">
+    </div>
+
+    <nav class="filter-options" aria-label="Bus filter options">
+      <button class="filter-option active" data-filter="all">All</button>
+      <button class="filter-option" data-filter="on-time">On Time</button>
+      <button class="filter-option" data-filter="delayed">Delayed</button>
+      <button class="filter-option" data-filter="offline">Offline</button>
+      <button class="filter-option" data-filter="maintenance">Maintenance</button>
+    </nav>
+
+    <nav class="sidebar-nav" id="busList" aria-label="Bus list">
+      <!-- Bus items injected by JavaScript -->
+    </nav>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <header class="content-header">
+      <h2>Bus Fleet Overview</h2>
+      <div class="header-actions">
+        <time class="current-time" id="currentTime" aria-live="polite"></time>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light theme">
+          <i class="fas fa-moon" aria-hidden="true"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- Stats -->
+    <section class="stats-cards" aria-label="Fleet statistics">
+      <div class="stat-card">
+        <i class="fas fa-bus" aria-hidden="true"></i>
+        <h3 id="totalBuses">24</h3>
+        <p>Total Buses</p>
+      </div>
+      <div class="stat-card">
+        <i class="fas fa-check-circle" aria-hidden="true"></i>
+        <h3 id="activeBuses">18</h3>
+        <p>Active Buses</p>
+      </div>
+      <div class="stat-card">
+        <i class="fas fa-tachometer-alt" aria-hidden="true"></i>
+        <h3>92%</h3>
+        <p>On-time Performance</p>
+      </div>
+      <div class="stat-card">
+        <i class="fas fa-users" aria-hidden="true"></i>
+        <h3>1,842</h3>
+        <p>Passengers Today</p>
+      </div>
+    </section>
+
+    <!-- Active Buses -->
+    <section class="content-section" aria-labelledby="activeBusesHeader">
+      <div class="section-header">
+        <h3 id="activeBusesHeader">Active Buses</h3>
+        <a href="#" class="view-all">View All <i class="fas fa-chevron-right" aria-hidden="true"></i></a>
+      </div>
+      <div class="bus-grid" id="activeBusGrid">
+        <!-- Active bus cards injected by JavaScript -->
+      </div>
+    </section>
+
+    <!-- Live Map -->
+    <section class="content-section" aria-labelledby="liveMapHeader">
+      <div class="section-header">
+        <h3 id="liveMapHeader">Live Map</h3>
+        <a href="#" class="view-all" id="fullScreenMap">Full Screen <i class="fas fa-expand" aria-hidden="true"></i></a>
+      </div>
+      <div class="map-container">
+        <div id="map" role="application" aria-label="Bus route live map"></div>
+        <div class="map-overlay">
+          <h4>Addis Ababa Bus Network</h4>
+          <p>Active buses: <span id="mapActiveBuses">18</span></p>
+          <p>Last updated: <time id="mapLastUpdated">00:00:00</time></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+      <div class="container footer-grid">
+        <!-- About -->
+        <div class="footer-col">
+          <h3 class="footer-title">Buses</h3>
+          <p>Making travel comfortable and affordable for everyone across the country.</p>
+          <div class="social-links">
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter" aria-hidden="true"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <nav class="footer-col" aria-label="Quick links">
+          <h4 class="footer-title">Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Routes</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">Buses</a></li>
+          </ul>
+        </nav>
+
+        <!-- Support -->
+        <nav class="footer-col" aria-label="Support links">
+          <h4 class="footer-title">Support</h4>
+          <ul class="footer-links">
+            <li><a href="#">FAQs</a></li>
+            <li><a href="#">Help Center</a></li>
+            <li><a href="#">Terms</a></li>
+            <li><a href="#">Privacy</a></li>
+          </ul>
+        </nav>
+
+        <!-- Contact -->
+        <div class="footer-col">
+          <h4 class="footer-title">Contact</h4>
+          <address>
+            <ul class="footer-contact">
+              <li>
+                <i class="fas fa-phone" aria-hidden="true"></i>
+                <a href="tel:+251921004920">+251 92-100-4920</a>
+              </li>
+              <li>
+                <i class="fas fa-envelope" aria-hidden="true"></i>
+                <a href="mailto:tasfeyetakele@gmail.com">tasfeyetakele@gmail.com</a>
+              </li>
+              <li>
+                <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                1000 Addis Ababa, Ethiopia
+              </li>
+            </ul>
+          </address>
+        </div>
+      </div>
+
+      <!-- Bottom -->
+      <div class="footer-bottom">
+        <p>&copy; <span id="currentYear"></span> Tekele Tesfeye. All rights reserved.</p>
+      </div>
+    </footer>
+  </main>
+
+  <!-- Auto Year -->
+  <script>
+    document.getElementById("currentYear").textContent = new Date().getFullYear();
+  </script>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer></script>
+  <script src="buses.js" defer></script>
 </body>
+
 </html>
